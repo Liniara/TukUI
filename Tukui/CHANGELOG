@@ -1,0 +1,23 @@
+t15 BETA CHANGELOG
+- fix bug from t14 to work with mop beta
+- bump version to t15 beta
+- T.PP function is renamed to T.DataTextPosition
+- T.TukuiShiftBarUpdate is renamed to T.ShiftBarUpdate
+- All the skinning (T.SkinXXXXXXXXX) functions is moved to the API.
+- Almost every functions are now accessible outside the addon.
+- Added a 4th engine to Tukui for editors. (G) 
+	. You'll be able to query all Tukui frames/text/etc from here easily. 
+	. This will allow editors to edit a lot easier their custom UI with a lot less code writing.
+- Rewrite of Mirror Bar.
+- There is no multiple raid layout anymore, only 1 available, which is grid.
+- Pets can now be show on raid frames (enabled default)
+- Added monk harmony class bar.
+- Added a new warlock class bar.
+- Added shadow priest class bar.
+- t14 combo pts is now a oUF plugin however the layout stay the same.
+- /resetconfig is gone, however a reset button is still available thought /tukui.
+- We now use our own buttons for the stance bar however the layout stay the same.
+- Implemented a Tukui popup dialog system to avoid multiple tainting issues with default Blizzard UI.
+- /hb (keybind mode) is now know as /kb
+- when in a vehicle UI, unused bar will now be hidden.
+- frame:CreatePanel(...) is gone.

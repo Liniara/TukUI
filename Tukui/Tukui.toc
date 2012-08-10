@@ -1,0 +1,12 @@
+﻿## Interface: 50001
+## Author: Tukz
+## Version: 15.0042
+## Title: |cffC495DDTukui|r
+## Notes: UI of awesomeness!
+## SavedVariables: TukuiData
+## SavedVariablesPerCharacter: TukuiDataPerChar
+## OptionalDeps: Tukui_ConfigUI, Tukui_EditedDefaultConfig, !ClassColors, Clique
+## X-oUF: oUFTukui
+## Website: www.tukui.org
+
+Tukui.xml 
