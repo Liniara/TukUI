@@ -272,11 +272,7 @@ local function Shared(self, unit)
 				local Resting = Experience:CreateTexture(nil, "OVERLAY")
 				Resting:SetHeight(28)
 				Resting:SetWidth(28)
-				if T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID" or T.myclass == "MONK" then
-					Resting:SetPoint("LEFT", -18, 76)
-				else
-					Resting:SetPoint("LEFT", -18, 68)
-				end
+				Resting:SetPoint("LEFT", -18, 76)
 				Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 				Resting:SetTexCoord(0, 0.5, 0, 0.421875)
 				self.Resting = Resting
@@ -324,7 +320,8 @@ local function Shared(self, unit)
 				end
 				DruidManaBackground:SetFrameLevel(8)
 				DruidManaBackground:SetFrameStrata("MEDIUM")
-				DruidManaBackground:SetTemplate("Default")
+				DruidManaBackground:SetBackdrop(backdrop)
+				DruidManaBackground:SetBackdropColor(0, 0, 0)
 				DruidManaBackground:SetBackdropBorderColor(0,0,0,0)
 				
 				local DruidManaBarStatus = CreateFrame("StatusBar", nil, DruidManaBackground)
@@ -351,7 +348,8 @@ local function Shared(self, unit)
 				end
 				eclipseBar:SetFrameStrata("MEDIUM")
 				eclipseBar:SetFrameLevel(8)
-				eclipseBar:SetTemplate("Default")
+				eclipseBar:SetBackdrop(backdrop)
+				eclipseBar:SetBackdropColor(0, 0, 0)
 				eclipseBar:SetBackdropBorderColor(0,0,0,0)
 				eclipseBar:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
 				eclipseBar:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
@@ -390,7 +388,8 @@ local function Shared(self, unit)
 				wb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 				wb:SetWidth((T.lowversion and 186) or 250)
 				wb:SetHeight(8)
-				wb:SetTemplate("Default")
+				wb:SetBackdrop(backdrop)
+				wb:SetBackdropColor(0, 0, 0)
 				wb:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 				
 				for i = 1, 4 do
@@ -442,7 +441,8 @@ local function Shared(self, unit)
 					bars:Width(250)
 				end
 				bars:Height(8)
-				bars:SetTemplate("Default")
+				bars:SetBackdrop(backdrop)
+				bars:SetBackdropColor(0, 0, 0)
 				bars:SetBackdropBorderColor(0,0,0,0)
 				
 				for i = 1, 5 do					
@@ -534,7 +534,8 @@ local function Shared(self, unit)
 				hb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 				hb:SetWidth((T.lowversion and 186) or 250)
 				hb:SetHeight(8)
-				hb:SetTemplate("Default")
+				hb:SetBackdrop(backdrop)
+				hb:SetBackdropColor(0, 0, 0)
 				hb:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 				
 				for i = 1, 5 do
@@ -570,7 +571,8 @@ local function Shared(self, unit)
 				pb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 				pb:SetWidth((T.lowversion and 186) or 250)
 				pb:SetHeight(8)
-				pb:SetTemplate("Default")
+				pb:SetBackdrop(backdrop)
+				pb:SetBackdropColor(0, 0, 0)
 				pb:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 				
 				for i = 1, 3 do
@@ -616,8 +618,8 @@ local function Shared(self, unit)
 				mb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 				mb:SetWidth((T.lowversion and 186) or 250)
 				mb:SetHeight(8)
-				mb:SetTemplate("Default")
-				mb:SetBackdropBorderColor(unpack(C.media.backdropcolor))
+				mb:SetBackdrop(backdrop)
+				mb:SetBackdropColor(0, 0, 0)			
 				
 				for i = 1, 6 do
 					mb[i] = CreateFrame("StatusBar", "TukuiArcaneBar"..i, mb)
@@ -774,7 +776,8 @@ local function Shared(self, unit)
 				CP:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 				CP:Width(T.lowversion and 186 or 250)
 				CP:Height(8)
-				CP:SetTemplate("Default")
+				CP:SetBackdrop(backdrop)
+				CP:SetBackdropColor(0, 0, 0)
 				CP:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 				CP.PostUpdate = T.ComboPointsBarUpdate
 
@@ -1734,6 +1737,10 @@ local function Shared(self, unit)
 		self:Tag(Name, "[Tukui:getnamecolor][Tukui:nameshort]")
 		self.Name = Name
 	end
+	
+	-- post update for editors
+	self.PostUpdateUnit = T.PostUpdateUnit or T.dummy
+	self:PostUpdateUnit(unit)
 	
 	return self
 end

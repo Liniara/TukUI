@@ -48,18 +48,12 @@ local function LoadSkin()
 	MerchantBuyBackItemItemButtonIconTexture:Point("TOPLEFT", 2, -2)
 	MerchantBuyBackItemItemButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
 
-
-	MerchantRepairItemButton:StyleButton(false)
+	MerchantRepairItemButton:StyleButton()
 	MerchantRepairItemButton:SetTemplate("Default", true)
-	for i=1, MerchantRepairItemButton:GetNumRegions() do
-		local region = select(i, MerchantRepairItemButton:GetRegions())
-		if region:GetObjectType() == "Texture" and region:GetTexture() == "Interface\\MerchantFrame\\UI-Merchant-RepairIcons" then
-			region:SetTexCoord(0.04, 0.24, 0.06, 0.5)
-			region:ClearAllPoints()
-			region:Point("TOPLEFT", 2, -2)
-			region:Point("BOTTOMRIGHT", -2, 2)
-		end
-	end
+	MerchantRepairItemButton:GetRegions():SetTexCoord(0.04, 0.24, 0.06, 0.5)
+	MerchantRepairItemButton:GetRegions():ClearAllPoints()
+	MerchantRepairItemButton:GetRegions():Point("TOPLEFT", 2, -2)
+	MerchantRepairItemButton:GetRegions():Point("BOTTOMRIGHT", -2, 2)
 
 	MerchantGuildBankRepairButton:StyleButton()
 	MerchantGuildBankRepairButton:SetTemplate("Default", true)

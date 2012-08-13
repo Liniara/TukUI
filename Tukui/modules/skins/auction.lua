@@ -321,11 +321,51 @@ local function LoadSecondarySkin()
 			tab.backdrop:Point("BOTTOMRIGHT", tab, -3, 0)	
 		end
 		
-		hooksecurefunc("BlackMarketScrollFrame_Update", function()
-			local buttons = BlackMarketScrollFrame.buttons
-			for i = 1, #buttons do
-				-- to be completed when Madam Goya will be active again
+	hooksecurefunc("BlackMarketScrollFrame_Update", function()
+		local buttons = BlackMarketScrollFrame.buttons
+		local numButtons = #buttons
+		local offset = HybridScrollFrame_GetOffset(BlackMarketScrollFrame)
+		local numItems = C_BlackMarket.GetNumItems()
+		
+		for i = 1, numButtons do
+			local button = buttons[i]
+			local index = offset + i
+			
+			
+			if not button.skinned then
+				button.Item:StripTextures()
+				button.Item:SetTemplate()
+				button.Item.IconTexture:SetInside()
+				button.Item.IconTexture:SetTexCoord(.1,.9,.1,.9)
+				button.Item:StyleButton()
+				button:StripTextures()
+				button.skinned = true
 			end
-		end)
+			
+			if ( index <= numItems ) then
+				local name, texture = C_BlackMarket.GetItemInfoByIndex(index)
+				if ( name ) then
+					button.Item.IconTexture:SetTexture(texture)
+				end
+			end
+		end
+	end)
+	
+	BlackMarketFrame.HotDeal:StripTextures()
+	BlackMarketFrame.HotDeal.Item:CreateBackdrop()
+	BlackMarketFrame.HotDeal.Item:StyleButton()
+	BlackMarketFrame.HotDeal.Item.hover:SetAllPoints()
+	BlackMarketFrame.HotDeal.Item.pushed:SetAllPoints()
+	
+	BlackMarketFrame.HotDeal.BidButton:SkinButton()
+	BlackMarketHotItemBidPriceGold:SkinEditBox()
+	
+	for i=1, BlackMarketFrame:GetNumRegions() do
+		local region = select(i, BlackMarketFrame:GetRegions())
+		if region and region:GetObjectType() == "FontString" and region:GetText() == BLACK_MARKET_TITLE then
+			region:ClearAllPoints()
+			region:SetPoint("TOP", BlackMarketFrame, "TOP", 0, -4)
+		end
+	end
 end
 T.SkinFuncs["Blizzard_BlackMarketUI"] = LoadSecondarySkin

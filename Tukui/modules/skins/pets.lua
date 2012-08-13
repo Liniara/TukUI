@@ -34,9 +34,13 @@ local function LoadSkin()
 			-- reskin mounts icons
 			b:StripTextures()
 			b:SetTemplate()
-			b:SetBackdropBorderColor(0, 0, 0, 0)
 			b:StyleButton()
+			b:SetBackdropBorderColor(0,0,0,0)
+			b:HideInsets()
 			b.icon:SetTexCoord(.08, .92, .08, .92)
+			b.DragButton:StyleButton()
+			b.DragButton.hover:SetAllPoints(b.DragButton)
+			b.DragButton.ActiveTexture:SetAlpha(0)
 			
 			-- create a backdrop around the icon
 			b:CreateBackdrop("Default")
@@ -53,7 +57,7 @@ local function LoadSkin()
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
 			local b = _G["MountJournalListScrollFrameButton"..i]
 			local t = _G["MountJournalListScrollFrameButton"..i.."Name"]
-			if b.selectedTexture:IsShown() then
+			if b.DragButton.ActiveTexture:IsShown() then
 				t:SetTextColor(1,1,0)
 				b.backdrop:SetBackdropBorderColor(1, 1, 0)
 			else
@@ -92,9 +96,13 @@ local function LoadSkin()
 			-- reskin mounts icons
 			b:StripTextures()
 			b:SetTemplate()
-			b:SetBackdropBorderColor(0, 0, 0, 0)
 			b:StyleButton()
+			b:SetBackdropBorderColor(0,0,0,0)
+			b:HideInsets()
 			b.icon:SetTexCoord(.08, .92, .08, .92)
+			b.dragButton:StyleButton()
+			b.dragButton.hover:SetAllPoints(b.dragButton)
+			b.dragButton.ActiveTexture:SetAlpha(0)
 			
 			-- create a backdrop around the icon
 			b:CreateBackdrop("Default")
@@ -110,7 +118,7 @@ local function LoadSkin()
 		for i = 1, #PetJournal.listScroll.buttons do
 			local b = _G["PetJournalListScrollFrameButton"..i]
 			local t = _G["PetJournalListScrollFrameButton"..i.."Name"]
-			if b.selectedTexture:IsShown() then
+			if b.dragButton.ActiveTexture:IsShown() then
 				t:SetTextColor(1,1,0)
 				b.backdrop:SetBackdropBorderColor(1, 1, 0)
 			else

@@ -219,15 +219,14 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 	end
 	
 	if BNTotalOnline > 0 then
-		local realID, playerFaction, grouped
+		local realID, grouped
 		for i = 1, #BNTable do
 			if (BNTable[i][7]) then
 				realID = BNTable[i][2]
 				menuCountWhispers = menuCountWhispers + 1
 				menuList[3].menuList[menuCountWhispers] = {text = realID, arg1 = realID, arg2 = true, notCheckable=true, func = whisperClick}
 
-				if select(1, UnitFactionGroup("player")) == "Horde" then playerFaction = 0 else playerFaction = 1 end
-				if BNTable[i][6] == wowString and playerFaction == BNTable[i][12] then
+				if BNTable[i][6] == wowString and UnitFactionGroup("player") then
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]], GetQuestDifficultyColor(BNTable[i][16])
 					if classc == nil then classc = GetQuestDifficultyColor(BNTable[i][16]) end
 

@@ -106,12 +106,90 @@ local function SetTemplate(f, t, tex)
 	f:SetBackdrop({
 	  bgFile = texture, 
 	  edgeFile = C.media.blank, 
-	  tile = false, tileSize = 0, edgeSize = mult, 
-	  insets = { left = -mult + inset, right = -mult + inset, top = -mult + inset, bottom = -mult + inset}
+	  tile = false, tileSize = 0, edgeSize = mult,
 	})
+	
+	if not noinset and not f.isInsetDone then
+		f.insettop = f:CreateTexture(nil, "BORDER")
+		f.insettop:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
+		f.insettop:Point("TOPRIGHT", f, "TOPRIGHT", 1, -1)
+		f.insettop:Height(1)
+		f.insettop:SetTexture(0,0,0)	
+		f.insettop:SetDrawLayer("BORDER", -7)
+		
+		f.insetbottom = f:CreateTexture(nil, "BORDER")
+		f.insetbottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, -1)
+		f.insetbottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
+		f.insetbottom:Height(1)
+		f.insetbottom:SetTexture(0,0,0)	
+		f.insetbottom:SetDrawLayer("BORDER", -7)
+		
+		f.insetleft = f:CreateTexture(nil, "BORDER")
+		f.insetleft:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
+		f.insetleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, -1)
+		f.insetleft:Width(1)
+		f.insetleft:SetTexture(0,0,0)
+		f.insetleft:SetDrawLayer("BORDER", -7)
+		
+		f.insetright = f:CreateTexture(nil, "BORDER")
+		f.insetright:Point("TOPRIGHT", f, "TOPRIGHT", 1, 1)
+		f.insetright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, -1)
+		f.insetright:Width(1)
+		f.insetright:SetTexture(0,0,0)	
+		f.insetright:SetDrawLayer("BORDER", -7)
 
+		f.insetinsidetop = f:CreateTexture(nil, "BORDER")
+		f.insetinsidetop:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
+		f.insetinsidetop:Point("TOPRIGHT", f, "TOPRIGHT", -1, 1)
+		f.insetinsidetop:Height(1)
+		f.insetinsidetop:SetTexture(0,0,0)	
+		f.insetinsidetop:SetDrawLayer("BORDER", -7)
+		
+		f.insetinsidebottom = f:CreateTexture(nil, "BORDER")
+		f.insetinsidebottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, 1)
+		f.insetinsidebottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, 1)
+		f.insetinsidebottom:Height(1)
+		f.insetinsidebottom:SetTexture(0,0,0)	
+		f.insetinsidebottom:SetDrawLayer("BORDER", -7)
+		
+		f.insetinsideleft = f:CreateTexture(nil, "BORDER")
+		f.insetinsideleft:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
+		f.insetinsideleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, 1)
+		f.insetinsideleft:Width(1)
+		f.insetinsideleft:SetTexture(0,0,0)
+		f.insetinsideleft:SetDrawLayer("BORDER", -7)
+		
+		f.insetinsideright = f:CreateTexture(nil, "BORDER")
+		f.insetinsideright:Point("TOPRIGHT", f, "TOPRIGHT", -1, -1)
+		f.insetinsideright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, 1)
+		f.insetinsideright:Width(1)
+		f.insetinsideright:SetTexture(0,0,0)	
+		f.insetinsideright:SetDrawLayer("BORDER", -7)
+
+		f.isInsetDone = true
+	end
+		
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
+end
+
+local borders = {
+	"insettop",
+	"insetbottom",
+	"insetleft",
+	"insetright",
+	"insetinsidetop",
+	"insetinsidebottom",
+	"insetinsideleft",
+	"insetinsideright",
+}
+
+local function HideInsets(f)
+	for i, border in pairs(borders) do
+		if f[border] then
+			f[border]:SetTexture(0,0,0,0)
+		end
+	end
 end
 
 local function CreateBackdrop(f, t, tex)
@@ -261,7 +339,7 @@ local function SetOriginalBackdrop(self)
 	if C["general"].classcolortheme == true then
 		self:SetBackdropBorderColor(color.r, color.g, color.b)
 	else
-		SetTemplate(self, "Default")
+		self:SetTemplate()
 	end
 end
 
@@ -598,6 +676,7 @@ local function addapi(object)
 	if not object.SkinCheckBox then mt.SkinCheckBox = SkinCheckBox end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
 	if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
+	if not object.HideInsets then mt.HideInsets = HideInsets end
 end
 
 local handled = {["Frame"] = true}

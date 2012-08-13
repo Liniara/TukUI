@@ -13,6 +13,7 @@ end
 for i = 1, total do
 	frame[i] = CreateFrame("Frame", "TukuiPopupDialog"..i, UIParent)
 	frame[i]:SetSize(400, 60)
+	frame[i]:SetFrameLevel(3)
 	frame[i]:CreateShadow("Default")
 	frame[i]:SetTemplate("Default")
 	frame[i]:Hide()
@@ -68,9 +69,9 @@ for i = 1, total do
 		-- create a panel which anchor popup #1 to top screen
 		frame[i].Anchor = CreateFrame("Frame", nil, frame[i])
 		frame[i].Anchor:SetSize(360, 30)
-		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, 0)
+		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, -2)
 		frame[i].Anchor:SetTemplate("Transparent")
-		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 1)
+		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 2)
 		
 		-- position popup #1
 		frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)

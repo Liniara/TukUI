@@ -16,12 +16,13 @@ TukuiWatchFrameAnchor:SetClampedToScreen(true)
 TukuiWatchFrameAnchor:SetMovable(true)
 TukuiWatchFrameAnchor:EnableMouse(false)
 TukuiWatchFrameAnchor:SetTemplate("Default")
-TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
-TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
+TukuiWatchFrameAnchor:SetBackdropBorderColor(1, 0, 0)
+TukuiWatchFrameAnchor:SetAlpha(0)
 TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, 12)
 TukuiWatchFrameAnchor.text:SetPoint("CENTER")
 TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
 TukuiWatchFrameAnchor.text:Hide()
+
 G.Misc.WatchFrameAnchor = TukuiWatchFrameAnchor
 
 -- set default position according to how many right bars we have
@@ -37,10 +38,9 @@ else
 end
 
 local screenheight = T.screenheight
-TukuiWatchFrame:SetParent(TukuiWatchFrameAnchor)
 TukuiWatchFrame:SetHeight(screenheight / 1.6)
 TukuiWatchFrame:ClearAllPoints()
-TukuiWatchFrame:SetPoint("TOP")
+TukuiWatchFrame:SetPoint("TOP", TukuiWatchFrameAnchor)
 
 local function init()
 	TukuiWatchFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")

@@ -128,7 +128,7 @@ oUF.Tags.Methods['Tukui:getnamecolor'] = function(unit)
 	end
 end
 
-oUF.Tags.Events['Tukui:nameshort'] = 'UNIT_NAME_UPDATE'
+oUF.Tags.Events['Tukui:nameshort'] = 'UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE'
 oUF.Tags.Methods['Tukui:nameshort'] = function(unit)
 	local name = UnitName(unit)
 	local isLeader = UnitIsGroupLeader(unit)

@@ -44,7 +44,7 @@ TukuiBar4:Point("BOTTOM", UIParent, "BOTTOM", 0, 14)
 TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
 TukuiBar4:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar4:SetFrameStrata("BACKGROUND")
-TukuiBar4:SetFrameLevel(2)
+TukuiBar4:SetFrameLevel(3)
 G.ActionBars.Bar4 = TukuiBar4
 
 local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", UIParent, "SecureHandlerStateTemplate")

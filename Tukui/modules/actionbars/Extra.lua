@@ -7,14 +7,15 @@ holder:Size(160, 80)
 holder:SetPoint("BOTTOM", 0, 250)
 holder:SetMovable(true)
 holder:SetTemplate("Default")
-holder:SetBackdropBorderColor(0,0,0,0)
-holder:SetBackdropColor(0,0,0,0)	
+holder:SetBackdropBorderColor(1,0,0)
+holder:SetAlpha(0)
+	
 holder.text = T.SetFontString(holder, C.media.uffont, 12)
 holder.text:SetPoint("CENTER")
 holder.text:SetText(L.move_extrabutton)
 holder.text:Hide()
 
-ExtraActionBarFrame:SetParent(holder)
+ExtraActionBarFrame:SetParent(UIParent)
 ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", holder, "CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager  = true
@@ -26,17 +27,14 @@ G.ActionBars.BarExtra.Holder = holder
 local button = ExtraActionButton1
 G.ActionBars.BarExtra.Button1 = ExtraActionButton1
 
-local icon = button.icon
-local texture = button.style
-local disableTexture = function(style, texture)
-	if texture then
-		style:SetTexture("")
-	end
+-- always hide the background texture of extra
+local disableTexture = function(self)
+	self.button.style:SetTexture("")
 end
-button.style:SetTexture("")
-hooksecurefunc(texture, "SetTexture", disableTexture)
+hooksecurefunc("ExtraActionBar_OnShow", disableTexture)
 
 -- spell icon
+local icon = button.icon
 icon:SetTexCoord(.08, .92, .08, .92)
 icon:Point("TOPLEFT", button, 2, -2)
 icon:Point("BOTTOMRIGHT", button, -2, 2)

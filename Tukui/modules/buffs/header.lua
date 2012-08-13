@@ -31,6 +31,12 @@ for _, frame in next, {
 		header:SetAttribute("wrapAfter", wrap)
 		header:SetAttribute("wrapYOffset", -67.5)
 		header:SetAttribute("xOffset", -35)
+		header:CreateBackdrop()
+		header.backdrop:SetBackdropBorderColor(1,0,0)
+		header.backdrop:FontString("text", C.media.uffont, 12)
+		header.backdrop.text:SetPoint("CENTER")
+		header.backdrop.text:SetText(L.move_buffs)
+		header.backdrop:SetAlpha(0)
 	end
 	header:SetAttribute("minWidth", wrap * 35)
 	header:SetAttribute("template", "TukuiAurasAuraTemplate")

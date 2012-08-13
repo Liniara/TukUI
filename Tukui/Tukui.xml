@@ -151,6 +151,7 @@
 	<Script file="modules\skins\inspect.lua"/>
 	<Script file="modules\skins\itemtext.lua"/>
 	<Script file="modules\skins\itemtransmogrify.lua"/>
+	<Script file="modules\skins\itemupgrade.lua"/>
 	<Script file="modules\skins\glyph.lua"/>
 	<Script file="modules\skins\gossip.lua"/>
 	<Script file="modules\skins\greeting.lua"/>

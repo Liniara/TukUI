@@ -22,7 +22,9 @@ f:SetScript("OnEvent", function()
 			for s=1,GetContainerNumSlots(b) do
 				local l,lid = GetContainerItemLink(b, s), GetContainerItemID(b, s)
 				if l and lid then
-					local p = select(11, GetItemInfo(l))*select(2, GetContainerItemInfo(b, s))
+					local p = 0
+					local mult1, mult2 = select(11, GetItemInfo(l)), select(2, GetContainerItemInfo(b, s))
+					if mult1 and mult2 then p = mult1 * mult2 end
 					if C["merchant"].sellgrays and select(3, GetItemInfo(l))==0 and p > 0 then
 						UseContainerItem(b, s)
 						PickupMerchantItem()

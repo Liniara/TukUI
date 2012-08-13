@@ -24,8 +24,7 @@ local function LoadSkin()
 	
 	for i=1,40 do
 		_G["RaidGroupButton"..i]:StripTextures()
-		_G["RaidGroupButton"..i]:SetTemplate("Default")
-		_G["RaidGroupButton"..i]:SetBackdropBorderColor(0, 0, 0, 0)
+		_G["RaidGroupButton"..i]:SkinButton()
 	end
 end
 
