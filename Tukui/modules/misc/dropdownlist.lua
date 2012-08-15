@@ -6,9 +6,13 @@ local T, C, L, G = unpack(select(2, ...))
 local function SkinDropDownList(level, index)
 	for i = 1, UIDROPDOWNMENU_MAXLEVELS do
 		local menubackdrop = _G["DropDownList"..i.."MenuBackdrop"]
-		local backdrop = _G["DropDownList"..i.."Backdrop"]
-		if not backdrop.isSkinned then
+		if menubackdrop and not menubackdrop.isSkinned then
 			menubackdrop:SetTemplate("Default")
+			menubackdrop.isSkinned = true
+		end
+		
+		local backdrop = _G["DropDownList"..i.."Backdrop"]
+		if backdrop and not backdrop.isSkinned then
 			backdrop:SetTemplate("Default")
 			backdrop.isSkinned = true
 		end

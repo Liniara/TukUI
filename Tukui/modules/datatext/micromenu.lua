@@ -34,7 +34,6 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 
 	local function OpenMenu()
 		if not TukuiMicroButtonsDropDown then return end
-		if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
 		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 

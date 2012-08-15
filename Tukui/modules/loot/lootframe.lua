@@ -282,7 +282,6 @@ addon.LOOT_CLOSED = function(self)
 end
 
 addon.OPEN_MASTER_LOOT_LIST = function(self)
-	if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
 	ToggleDropDownMenu(1, nil, GroupLootDropDown, addon.slots[ss], 0, 0)
 end
 

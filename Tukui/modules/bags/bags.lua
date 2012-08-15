@@ -438,7 +438,7 @@ function Stuffing:CreateBagFrame(w)
 				CloseDropDownMenus()
 				Stuffing_DDMenu.initialize = Stuffing.Menu
 			end
-			if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
+
 			ToggleDropDownMenu(1, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
 			return
 		end

@@ -390,8 +390,6 @@ T.SpawnMenu = function(self)
 	local unit = self.unit:gsub("(.)", string.upper, 1)
 	if unit == "Targettarget" or unit == "focustarget" or unit == "pettarget" then return end
 	
-	if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
-	
 	if _G[unit.."FrameDropDown"] then
 		ToggleDropDownMenu(1, nil, _G[unit.."FrameDropDown"], "cursor")
 	elseif (self.unit:match("party")) then
@@ -701,12 +699,12 @@ T.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, d
 	if icon then
 		if(icon.filter == "HARMFUL") then
 			if(not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle") then
-				icon:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 				icon.icon:SetDesaturated(true)
+				icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
 			else
 				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
-				icon:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
 				icon.icon:SetDesaturated(false)
+				icon:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
 			if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
@@ -873,6 +871,7 @@ end
 -- show the druid bar mana or eclipse if form is moonkin/cat/bear.
 T.DruidBarDisplay = function(self, login)
 	local eb = self.EclipseBar
+	local m = self.WildMushroom
 	local dm = self.DruidMana
 	local txt = self.EclipseBar.Text
 	local shadow = self.shadow
@@ -883,7 +882,7 @@ T.DruidBarDisplay = function(self, login)
 		dm:SetScript("OnUpdate", nil)
 	end
 	
-	if dm:IsShown() then
+	if dm and dm:IsShown() then
 		shadow:Point("TOPLEFT", -4, 12)
 		bg:SetAlpha(1)
 	else
@@ -892,18 +891,50 @@ T.DruidBarDisplay = function(self, login)
 		bg:SetAlpha(0)
 	end
 		
-	if eb:IsShown() or dm:IsShown() then
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
 		if eb:IsShown() then
 			txt:Show()
 			flash:Hide()
 		end
 		shadow:Point("TOPLEFT", -4, 12)
 		bg:SetAlpha(1)
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 21)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+		end
 	else
 		txt:Hide()
 		flash:Show()
 		shadow:Point("TOPLEFT", -4, 4)
 		bg:SetAlpha(0)
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 12)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+		end
+	end
+end
+
+T.UpdateMushroomVisibility = function(self)
+	local p = self:GetParent()
+	local eb = p.EclipseBar
+	local dm = p.DruidMana
+	local m = p.WildMushroom
+	local shadow = p.shadow
+	
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
+		shadow:Point("TOPLEFT", -4, 21)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 10)
+	else
+		shadow:Point("TOPLEFT", -4, 12)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 1)	
 	end
 end
 

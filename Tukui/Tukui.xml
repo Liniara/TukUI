@@ -32,6 +32,7 @@
 	<Script file="modules\unitframes\plugins\oUF_ShadowOrbsBar\oUF_ShadowOrbsBar.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_WarlockSpecBars\oUF_WarlockSpecBars.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_ArcaneCharge\oUF_ArcaneCharge.lua"/>
+	<Script file="modules\unitframes\plugins\oUF_WildMushroom\oUF_WildMushroom.lua"/>
 	<Script file="modules\unitframes\templates\colors.lua"/>
 	<Script file="core\video.lua"/>
 	<Script file="core\deprecated.lua"/>

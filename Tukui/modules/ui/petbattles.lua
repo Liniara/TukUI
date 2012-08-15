@@ -229,6 +229,17 @@ for i = 1, FloatingBattlePetTooltip:GetNumChildren() do
 	end
 end
 
+BattlePetTooltip.Background:SetTexture(nil)
+BattlePetTooltip.BorderTop:SetTexture(nil)
+BattlePetTooltip.BorderTopLeft:SetTexture(nil)
+BattlePetTooltip.BorderTopRight:SetTexture(nil)
+BattlePetTooltip.BorderLeft:SetTexture(nil)
+BattlePetTooltip.BorderRight:SetTexture(nil)
+BattlePetTooltip.BorderBottom:SetTexture(nil)
+BattlePetTooltip.BorderBottomRight:SetTexture(nil)
+BattlePetTooltip.BorderBottomLeft:SetTexture(nil)
+BattlePetTooltip:SetTemplate()
+
 -- TOOLTIP DEFAULT POSITION
 hooksecurefunc("PetBattleAbilityTooltip_Show", function()
 	local t = PetBattlePrimaryAbilityTooltip

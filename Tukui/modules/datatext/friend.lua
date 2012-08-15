@@ -238,7 +238,6 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 		end
 	end
 
-	if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
 	EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
 end)
 

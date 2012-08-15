@@ -162,7 +162,6 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 	elseif btn == "MiddleButton" then
 		if not TukuiMicroButtonsDropDown then return end
 		if position:match("RIGHT") then xoff = T.Scale(-160) end
-		if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
 		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
 	else
 		Minimap_OnClick(self)

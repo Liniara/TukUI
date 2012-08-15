@@ -96,7 +96,7 @@ local function SetChatStyle(frame)
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
 
-	if not C.chat.background and not frame.temp then
+	if not C.chat.background then
 		-- hide text when setting chat
 		_G[chat.."TabText"]:Hide()
 		

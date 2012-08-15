@@ -379,6 +379,41 @@ local function Shared(self, unit)
 
 				self.EclipseBar = eclipseBar
 				self.EclipseBar.Text = eclipseBarText
+				
+				local m = CreateFrame("Frame", "TukuiWildMushroomBar", self)
+				m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+				m:SetWidth((T.lowversion and 186) or 250)
+				m:SetHeight(8)
+				m:SetBackdrop(backdrop)
+				m:SetBackdropColor(0, 0, 0)
+				m:SetBackdropBorderColor(unpack(C.media.backdropcolor))
+				
+				for i = 1, 3 do
+					m[i] = CreateFrame("StatusBar", "TukuiWildMushroomBar"..i, m)
+					m[i]:Height(8)
+					m[i]:SetStatusBarTexture(C.media.normTex)
+					
+					if i == 1 then
+						if T.lowversion then
+							m[i]:Width((186 / 3))
+						else
+							m[i]:Width((250 / 3) - 1)
+						end
+						m[i]:SetPoint("LEFT", m, "LEFT", 0, 0)
+					else
+						if T.lowversion then
+							m[i]:Width((186 / 3) - 1)
+						else
+							m[i]:Width((250 / 3))
+						end
+						m[i]:SetPoint("LEFT", m[i-1], "RIGHT", 1, 0)
+					end
+					m[i].bg = m[i]:CreateTexture(nil, 'ARTWORK')
+				end
+				
+				m:SetScript("OnShow", T.UpdateMushroomVisibility)
+
+				self.WildMushroom = m
 			end
 			
 			if T.myclass == "WARLOCK" then
@@ -2046,6 +2081,7 @@ if C.unitframes.raid == true then
 			RaidIcon:Width(18*T.raidscale)
 			RaidIcon:SetPoint("CENTER", self, "TOP")
 			RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
+			RaidIcon.SetTexture = T.dummy -- idk why but RaidIcon:GetTexture() is returning nil in oUF, resetting icons to default ... stop it!
 			self.RaidIcon = RaidIcon
 		end
 		

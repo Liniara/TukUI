@@ -29,7 +29,6 @@ WorldFrame:HookScript("OnMouseDown", function(self, button)
         local inParty = (GetNumGroupMembers() > 0)
         local inRaid = (GetNumGroupMembers() > 0)
         if(inRaid and (IsRaidLeader() or IsRaidOfficer()) or (inParty and not inRaid)) then
-			if not UIDROPDOWNMENU_MENU_LEVEL then UIDROPDOWNMENU_MENU_LEVEL = 1 end -- bug fix
 			EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 1)
         end
     end
